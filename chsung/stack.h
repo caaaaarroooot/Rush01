@@ -29,7 +29,7 @@ typedef struct s_stack
 }	t_stack;
 
 t_node	*new_node(void);
-t_stack	*new_queue(void);
+t_stack	*new_stack(void);
 void	s_put(t_stack *s, t_node *n);
-t_node	*s_get(t_stack *s);
+t_node	*s_pop(t_stack *s);
 #endif

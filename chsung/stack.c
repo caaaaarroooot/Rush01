@@ -37,32 +37,32 @@ t_stack	*new_stack(void)
 {
 	t_stack	*s;
 
-	q = (t_queue *)malloc(sizeof(t_queue));
-	q->first = NULL;
-	q->last = NULL;
-	q->len = 0;
-	return (q);
+	s = (t_stack *)malloc(sizeof(t_stack));
+	s->first = NULL;
+	s->last = NULL;
+	s->len = 0;
+	return (s);
 }
 
-void	q_put(t_queue *q, t_node *n)
+void	s_put(t_stack *s, t_node *n)
 {
 	t_node	*last;
 
-	last = q->last;
+	last = s->last;
 	last->next = n;
 	n->prev = last;
-	q->last = n;
-	(q->len)++;
+	s->last = n;
+	(s->len)++;
 }
 
-t_node	*q_get(t_queue *q)
+t_node	*s_pop(t_stack *s)
 {
 	t_node	*n;
 
-	n = q->first;
-	q->first = n->next;
-	q->first->prev = NULL;
-	n->next = NULL;
-	(q->len)--;
+	n = s->last;
+	s->last = n->prev;
+	s->last->next = NULL;
+	n->prev = NULL;
+	(s->len)--;
 	return (n);
 }
