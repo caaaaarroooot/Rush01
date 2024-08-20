@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chsung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 14:12:40 by chsung            #+#    #+#             */
-/*   Updated: 2024/08/20 14:12:46 by chsung           ###   ########.fr       */
+/*   Created: 2024/08/20 16:49:14 by chsung            #+#    #+#             */
+/*   Updated: 2024/08/20 16:49:15 by chsung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "solve.h"
+#ifndef STACK_H
+# define STACK_H
+# include "utils.h"
 
-int	main(int argc, char *argv[])
+typedef struct s_node
 {
-	const char	**board;
-	const char	*constrains;
+	struct s_node	*prev;
+	struct s_node	*next;
+	char	board[MAX_SIZE][MAX_SIZE];
+}	t_node;
 
-	if (argc != 2 || is_invalid_arg(argv[1]))
-	{
-		print_str("Error\n");
-		return (0);
-	}
-	constrains = get_constrains(argv[1]);
-	board = (const char **)solve(constrains);
-	print_board(board);
-	return (0);
-}
+typedef struct s_stack
+{
+	struct s_node	*first;
+	struct s_node	*last;
+	unsigned int	len;
+}	t_stack;
+
+t_node	*new_node(void);
+t_stack	*new_queue(void);
+void	s_put(t_stack *s, t_node *n);
+t_node	*s_get(t_stack *s);
+#endif
