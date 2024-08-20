@@ -12,43 +12,79 @@
 
 #include "universal.h"
 
-char	*make_available_decision(const t_node *n, int r, int c)
+t_coordinate	get_coordinate(const int idx)
 {
-	int		i;
-	char	*arr;
-	t_node	*t;
-	
-	i = 0;
-	arr = malloc(MAX_SIZE + 1);
-	while (++i < MAX_SIZE)
-	{
-		t = cp_node(n);
-		// for i in 1 to 4,
-		// check if i can place here. if yes, add to arr
-		// else, pass
-	}
-	arr[i] = 0;
-	return (arr);
+	int	i;
+	int	j;
+
+	i = idx / MAX_SIZE;
+	j = idx % MAX_SIZE;
+	return ((t_coordinate){i, j});
 }
 
-int	dfs(const t_node *prev, const int depth)
+int	try_place(t_node *n, char c)
 {
-	t_node current;
+	t_coordinate	coord;
+
+	coord = get_coordinate(n->depth);
+	if (n->board[coord.i][coord.j] != 0)
+		return (1);
+	n->board[coord.i][coord.j] = c;
+	if (is_violate(n))
+	{
+		n->board[coord.i][coord.j] = 0;
+		return (0);
+	}
+	return (1);
+}
+
+t_node	*build_result(const t_node *n)
+{
+	int		i;
+	int		j;
+	t_node	*res;
+
+	res = malloc(sizeof(t_node));
+	res->constrains = n->constrains;
+	res->depth = n->depth;
+	i = -1;
+	while (++i < MAX_SIZE)
+	{
+		j = -1;
+		while (++j < MAX_SIZE)
+		{
+			res->board[i][j] = n->board[i][j];
+		}
+	}
+	return (res);
+}
+
+t_node	*dfs(const t_node *prev)
+{
+	char			c;
+	t_node			*res;
+	t_node			current;
+
+	new_node(&current, prev);
+	if (current.depth == MAX_SIZE * MAX_SIZE)
+		return (build_result(&current));
+	c = '0';
+	while (++c < '0' + MAX_SIZE)
+	{
+		if (try_place(&current, c))
+			res = dfs(&current);
+		if (!res)
+			return (res);
+	}
+	return (NULL);
 }
 
 t_node	*solve(const char *constrains)
 {
-	int		i;
-	t_stack	*s;
-	t_node	*answer;
+	t_node	node;
 
-	s = new_stack();
-	s_put(s, make_first_node(constrains));
-	while (s->len != 0)
-	{
-		/* code */
-	}
-	if (s->len == 0)
-		return (NULL);
-	return (answer);
+	node.depth = -1;
+	node.constrains = constrains;
+	init_node(&node);
+	return (dfs(&node));
 }

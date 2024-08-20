@@ -18,30 +18,34 @@
 
 typedef struct s_node
 {
-	char	board[MAX_SIZE][MAX_SIZE];
+	const char	*constrains;
+	int			depth;
+	char		board[MAX_SIZE][MAX_SIZE];
 }	t_node;
 
-typedef struct s_step
+typedef struct s_coordinate
 {
-	const int	i_step;
-	const int	j_step;
-}	t_step;
+	int	i;
+	int	j;
+}	t_coordinate;
+
+typedef t_coordinate	t_step;
 
 // count.c
-int		is_violate(const t_node *n, const int i, const int j, \
-					const char *constrains);
+int				is_violate(const t_node *n);
 
 // node.c
-void	cp_node(t_node *dest, const t_node *src);
-void	make_first_node(t_node *n, const char *constrains);
+void			init_node(t_node *n);
+void			new_node(t_node *current, const t_node *prev);
 
 // solve.c
-t_node	*solve(const char *constrains);
+t_coordinate	get_coordinate(const int idx);
+t_node			*solve(const char *constrains);
 
 // utils.c
-void	print_str(const char *str);
-void	print_board(t_node *n);
-int		is_invalid_arg(const char *arg);
-char	*get_constrains(const char *arg);
+void			print_str(const char *str);
+void			print_board(t_node *n);
+int				is_invalid_arg(const char *arg);
+char			*get_constrains(const char *arg);
 
 #endif

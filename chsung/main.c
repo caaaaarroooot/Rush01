@@ -14,7 +14,7 @@
 
 int	main(int argc, char *argv[])
 {
-	const char	**board;
+	t_node		*result;
 	const char	*constrains;
 
 	if (argc != 2 || is_invalid_arg(argv[1]))
@@ -23,7 +23,10 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	constrains = get_constrains(argv[1]);
-	board = (const char **)solve(constrains);
-	print_board(board);
+	result = solve(constrains);
+	if (!result)
+		// TODO: FIX
+		print_str("No Answer\n");
+	print_board(result);
 	return (0);
 }

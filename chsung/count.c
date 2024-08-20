@@ -92,19 +92,18 @@ int	count_col_down(const t_node *n, const int j)
 	return (c);
 }
 
-int	is_violate(const t_node *n, const int i, const int j, \
-				const char *constrains)
+int	is_violate(const t_node *n)
 {
-	int	idx;
-	int	c;
+	t_coordinate	coord;
 
-	if (count_col_up(n, j) != constrains[j])
+	coord = get_coordinate(n->depth);
+	if (count_col_up(n, coord.j) != n->constrains[coord.j])
 		return (1);
-	if (count_col_down(n, j) != constrains[MAX_SIZE + j])
+	if (count_col_down(n, coord.j) != n->constrains[MAX_SIZE + coord.j])
 		return (1);
-	if (count_row_left(n, i) != constrains[2 * MAX_SIZE + i])
+	if (count_row_left(n, coord.i) != n->constrains[2 * MAX_SIZE + coord.i])
 		return (1);
-	if (count_row_right(n, i) != constrains[3 * MAX_SIZE + i])
+	if (count_row_right(n, coord.i) != n->constrains[3 * MAX_SIZE + coord.i])
 		return (1);
 	return (0);
 }

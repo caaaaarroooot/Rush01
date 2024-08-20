@@ -12,7 +12,7 @@
 
 #include "universal.h"
 
-void	cp_node(t_node *dest, const t_node *src)
+void	init_board(t_node *n)
 {
 	int		i;
 	int		j;
@@ -23,7 +23,25 @@ void	cp_node(t_node *dest, const t_node *src)
 		j = -1;
 		while (++j < MAX_SIZE)
 		{
-			dest->board[i][j] = src->board[i][j];
+			n->board[i][j] = 0;
+		}
+	}
+}
+
+void	new_node(t_node *current, const t_node *prev)
+{
+	int		i;
+	int		j;
+
+	current->constrains = prev->constrains;
+	current->depth = prev->depth + 1;
+	i = -1;
+	while (++i < MAX_SIZE)
+	{
+		j = -1;
+		while (++j < MAX_SIZE)
+		{
+			current->board[i][j] = prev->board[i][j];
 		}
 	}
 }
@@ -48,23 +66,21 @@ void	clear_line(t_node *n, int i, int j, t_step s)
 	while (++c <= '0' + MAX_SIZE)
 	{
 		n->board[i][j] = c;
-		i += s.i_step;
-		j += s.j_step;
+		i += s.i;
+		j += s.j;
 	}
 }
 
-void	make_first_node(t_node *n, const char *constrains)
+void	init_node(t_node *n)
 {
-	// TODO: change current decision idx
 	int		i;
-	int		r;
 	int		c;
 
 	i = -1;
-	n = new_node();
+	init_board(n);
 	while (++i < 4 * MAX_SIZE)
 	{
-		c = constrains[i] - '0';
+		c = n->constrains[i] - '0';
 		if (c == 1)
 			clear_first(n, i);
 		else if (c == MAX_SIZE)
@@ -79,5 +95,4 @@ void	make_first_node(t_node *n, const char *constrains)
 				clear_line(n, i - 3 * MAX_SIZE, MAX_SIZE - 1, (t_step){0, -1});
 		}
 	}
-	return (n);
 }
