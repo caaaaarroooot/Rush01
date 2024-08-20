@@ -23,18 +23,18 @@ void	print_str(const char *str)
 	}
 }
 
-void	print_board(const char **board)
+void	print_board(const t_node *n)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	j = -1;
 	while (++i < MAX_SIZE)
 	{
+		j = -1;
 		while (++j < MAX_SIZE)
 		{
-			write(1, &(board[i][j]), 1);
+			write(1, &(n->board[i][j]), 1);
 			if (j < MAX_SIZE - 1)
 				write(1, " ", 1);
 		}
@@ -51,7 +51,7 @@ int	is_invalid_arg(const char *arg)
 	count = 0;
 	while (arg[++i] != '\0')
 	{
-		if (i >= 8 * MAX_SIZE)
+		if (i >= 8 * MAX_SIZE - 1)
 			return (1);
 		if (i % 2 == 0)
 		{
@@ -86,4 +86,14 @@ char	*get_constrains(const char *arg)
 		if ('1' <= arg[i] && arg[i] <= '0' + MAX_SIZE)
 			arr[j++] = arg[i];
 	return (arr);
+}
+
+t_coordinate	get_coordinate(const int idx)
+{
+	int	i;
+	int	j;
+
+	i = idx / MAX_SIZE;
+	j = idx % MAX_SIZE;
+	return ((t_coordinate){i, j});
 }

@@ -92,27 +92,20 @@ int	count_col_down(const t_node *n, const int j)
 	return (c);
 }
 
-int	is_violate(const t_node *n, const char *constrains)
+int	is_not_goal(const t_node *n)
 {
-	int	idx;
-	int	c;
+	int			i;
+	int			con;
 
-	c = 0;
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_col_up(n, idx) != constrains[c++])
+	i = -1;
+	while (++i < MAX_SIZE * 4)
+	{
+		con = n->constrains[i] - '0';
+		if (((i / MAX_SIZE == 0) && (count_col_up(n, i % MAX_SIZE) != con)) \
+		|| ((i / MAX_SIZE == 1) && (count_col_down(n, i % MAX_SIZE) != con)) \
+		|| ((i / MAX_SIZE == 2) && (count_row_left(n, i % MAX_SIZE) != con)) \
+		|| ((i / MAX_SIZE == 3) && (count_row_right(n, i % MAX_SIZE) != con)))
 			return (1);
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_col_down(n, idx) != constrains[c++])
-			return (1);
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_row_left(n, idx) != constrains[c++])
-			return (1);
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_row_right(n, idx) != constrains[c++])
-			return (1);
+	}
 	return (0);
 }

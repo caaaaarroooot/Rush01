@@ -14,48 +14,43 @@
 # define UNIVERSAL_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # define MAX_SIZE 4
 
 typedef struct s_node
 {
-	struct s_node	*prev;
-	struct s_node	*next;
-	char			board[MAX_SIZE][MAX_SIZE];
+	const char	*constrains;
+	int			depth;
+	char		board[MAX_SIZE][MAX_SIZE];
 }	t_node;
 
-typedef struct s_stack
+typedef struct s_coordinate
 {
-	struct s_node	*first;
-	struct s_node	*last;
-	unsigned int	len;
-}	t_stack;
+	int	i;
+	int	j;
+}	t_coordinate;
 
-typedef struct s_step
-{
-	const int	i_step;
-	const int	j_step;
-}	t_step;
+typedef t_coordinate	t_step;
 
 // count.c
-int		is_violate(const t_node *n, const char *constrains);
+int				is_not_goal(const t_node *n);
 
 // node.c
-t_node	*new_node(void);
-t_node	*cp_node(const t_node *src);
-t_node	*make_first_node(const char *constrains);
+void			new_node(t_node *current, const t_node *prev);
+void			init_node(t_node *n);
 
 // solve.c
-t_node	*solve(const char *constrains);
-
-// stack.c
-t_stack	*new_stack(void);
-void	s_put(t_stack *s, t_node *n);
-t_node	*s_pop(t_stack *s);
+t_node			*solve(const char *constrains);
 
 // utils.c
-void	print_str(const char *str);
-void	print_board(const char **board);
-int		is_invalid_arg(const char *arg);
-int		*get_constrains(const char *arg);
+void			print_str(const char *str);
+void			print_board(const t_node *n);
+int				is_invalid_arg(const char *arg);
+char			*get_constrains(const char *arg);
+t_coordinate	get_coordinate(const int idx);
+
+// utils2.c
+int				is_duplicate_row(const t_node *n);
+int				is_duplicate_col(const t_node *n);
 
 #endif
