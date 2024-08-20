@@ -92,7 +92,8 @@ int	count_col_down(const t_node *n, const int j)
 	return (c);
 }
 
-int	is_violate(const t_node *n, const int i, const int j, const char *constrains)
+int	is_violate(const t_node *n, const int i, const int j, \
+				const char *constrains)
 {
 	int	idx;
 	int	c;

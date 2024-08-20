@@ -31,6 +31,11 @@ char	*make_available_decision(const t_node *n, int r, int c)
 	return (arr);
 }
 
+int	dfs(const t_node *prev, const int depth)
+{
+	t_node current;
+}
+
 t_node	*solve(const char *constrains)
 {
 	int		i;

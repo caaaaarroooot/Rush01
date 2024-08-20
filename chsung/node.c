@@ -12,42 +12,20 @@
 
 #include "universal.h"
 
-t_node	*new_node(void)
+void	cp_node(t_node *dest, const t_node *src)
 {
 	int		i;
 	int		j;
-	t_node	*n;
 
-	n = (t_node *)malloc(sizeof(t_node));
 	i = -1;
 	while (++i < MAX_SIZE)
 	{
 		j = -1;
 		while (++j < MAX_SIZE)
 		{
-			n->board[i][j] = 0;
+			dest->board[i][j] = src->board[i][j];
 		}
 	}
-	return (n);
-}
-
-t_node	*cp_node(const t_node *src)
-{
-	int		i;
-	int		j;
-	t_node	*n;
-
-	n = (t_node *)malloc(sizeof(t_node));
-	i = -1;
-	while (++i < MAX_SIZE)
-	{
-		j = -1;
-		while (++j < MAX_SIZE)
-		{
-			n->board[i][j] = src->board[i][j];
-		}
-	}
-	return (n);
 }
 
 void	clear_first(t_node	*n, const int i)
@@ -62,7 +40,7 @@ void	clear_first(t_node	*n, const int i)
 		n->board[i - 3 * MAX_SIZE][MAX_SIZE - 1] = MAX_SIZE;
 }
 
-void	clear_line(t_node	*n, int i, int j, t_step s)
+void	clear_line(t_node *n, int i, int j, t_step s)
 {
 	char	c;
 
@@ -75,13 +53,12 @@ void	clear_line(t_node	*n, int i, int j, t_step s)
 	}
 }
 
-t_node	*make_first_node(const char *constrains)
+void	make_first_node(t_node *n, const char *constrains)
 {
 	// TODO: change current decision idx
 	int		i;
 	int		r;
 	int		c;
-	t_node	*n;
 
 	i = -1;
 	n = new_node();
