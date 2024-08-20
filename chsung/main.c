@@ -21,12 +21,12 @@ int	main(int argc, char *argv[])
 		print_str("Error\n");
 		return (0);
 	}
-	if (invalid_arg(MAX_SIZE, argv[1]))
+	if (invalid_arg(argv[1]))
 	{
 		print_str("Error\n");
 		return (0);
 	}
 	board = solve();
-	print_borad(MAX_SIZE, board);
+	print_borad(board);
 	return (0);
 }

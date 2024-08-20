@@ -16,8 +16,8 @@ void	print_str(const char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i] != '\0')
+	i = -1;
+	while (str[++i] != '\0')
 	{
 		write(1, &str[i], 1);
 	}
@@ -28,16 +28,17 @@ void	print_borad(const char **board)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < MAX_SIZE)
+	i = -1;
+	j = -1;
+	while (++i < MAX_SIZE)
 	{
-		while (j < MAX_SIZE)
+		while (++j < MAX_SIZE)
 		{
 			write(1, &(board[i][j]), 1);
 			if (j < MAX_SIZE - 1)
 				write(1, " ", 1);
 		}
+		write(1, "\n", 1);
 	}
 }
 
@@ -46,9 +47,9 @@ int	invalid_arg(const char *arg)
 	int	i;
 	int	count;
 
-	i = 0;
+	i = -1;
 	count = 0;
-	while (arg[i] != '\0')
+	while (arg[++i] != '\0')
 	{
 		if (i >= 8 * MAX_SIZE)
 			return (1);
@@ -68,4 +69,21 @@ int	invalid_arg(const char *arg)
 	if (count != (MAX_SIZE * 4))
 		return (1);
 	return (0);
+}
+
+int	*constrain(const char *arg)
+{
+	int	i;
+	int	j;
+	int	*arr;
+
+	i = -1;
+	j = 0;
+	arr = malloc(sizeof(char) * MAX_SIZE * 4);
+	if (!arr)
+		return (NULL);
+	while (arg[++i] != '\0')
+		if ('1' <= arg[i] && arg[i] <= '0' + MAX_SIZE)
+			arr[j++] = arg[i];
+	return (arr);
 }
