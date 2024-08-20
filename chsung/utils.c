@@ -87,3 +87,13 @@ char	*get_constrains(const char *arg)
 			arr[j++] = arg[i];
 	return (arr);
 }
+
+t_coordinate	get_coordinate(const int idx)
+{
+	int	i;
+	int	j;
+
+	i = idx / MAX_SIZE;
+	j = idx % MAX_SIZE;
+	return ((t_coordinate){i, j});
+}

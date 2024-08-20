@@ -12,14 +12,14 @@
 
 #include "universal.h"
 
-t_coordinate	get_coordinate(const int idx)
+int	already_placed(t_node *n)
 {
-	int	i;
-	int	j;
+	t_coordinate	coord;
 
-	i = idx / MAX_SIZE;
-	j = idx % MAX_SIZE;
-	return ((t_coordinate){i, j});
+	coord = get_coordinate(n->depth);
+	if (n->board[coord.i][coord.j] != 0)
+		return (1);
+	return (0);
 }
 
 int	try_place(t_node *n, char c)
@@ -27,11 +27,10 @@ int	try_place(t_node *n, char c)
 	t_coordinate	coord;
 
 	coord = get_coordinate(n->depth);
-	if (n->board[coord.i][coord.j] != 0)
-		return (1);
 	n->board[coord.i][coord.j] = c;
-	if (is_violate(n))
+	if (is_invalid_row_col_wise(n))
 	{
+		// printf("violate: %c\n", c);
 		n->board[coord.i][coord.j] = 0;
 		return (0);
 	}
@@ -65,15 +64,24 @@ t_node	*dfs(const t_node *prev)
 	t_node			*res;
 	t_node			current;
 
+	res = NULL;
 	new_node(&current, prev);
+	// print_str("----------\n");
+	// printf("%d\n", current.depth);
+	// print_board(&current);
 	if (current.depth == MAX_SIZE * MAX_SIZE)
 		return (build_result(&current));
+	if (already_placed(&current))
+		return (dfs(&current));
 	c = '0';
-	while (++c < '0' + MAX_SIZE)
+	while (++c <= '0' + MAX_SIZE)
 	{
 		if (try_place(&current, c))
+		{
+			// printf("try_place\n");
 			res = dfs(&current);
-		if (!res)
+		}
+		if (res)
 			return (res);
 	}
 	return (NULL);
