@@ -23,7 +23,7 @@ void	print_str(const char *str)
 	}
 }
 
-void	print_board(const char **board)
+void	print_board(t_node *n)
 {
 	int	i;
 	int	j;
@@ -34,7 +34,7 @@ void	print_board(const char **board)
 	{
 		while (++j < MAX_SIZE)
 		{
-			write(1, &(board[i][j]), 1);
+			write(1, &(n->board[i][j]), 1);
 			if (j < MAX_SIZE - 1)
 				write(1, " ", 1);
 		}

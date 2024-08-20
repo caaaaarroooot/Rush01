@@ -92,27 +92,18 @@ int	count_col_down(const t_node *n, const int j)
 	return (c);
 }
 
-int	is_violate(const t_node *n, const char *constrains)
+int	is_violate(const t_node *n, const int i, const int j, const char *constrains)
 {
 	int	idx;
 	int	c;
 
-	c = 0;
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_col_up(n, idx) != constrains[c++])
-			return (1);
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_col_down(n, idx) != constrains[c++])
-			return (1);
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_row_left(n, idx) != constrains[c++])
-			return (1);
-	idx = -1;
-	while (++idx < MAX_SIZE)
-		if (count_row_right(n, idx) != constrains[c++])
-			return (1);
+	if (count_col_up(n, j) != constrains[j])
+		return (1);
+	if (count_col_down(n, j) != constrains[MAX_SIZE + j])
+		return (1);
+	if (count_row_left(n, i) != constrains[2 * MAX_SIZE + i])
+		return (1);
+	if (count_row_right(n, i) != constrains[3 * MAX_SIZE + i])
+		return (1);
 	return (0);
 }

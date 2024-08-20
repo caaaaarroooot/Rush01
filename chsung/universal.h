@@ -18,9 +18,7 @@
 
 typedef struct s_node
 {
-	struct s_node	*prev;
-	struct s_node	*next;
-	char			board[MAX_SIZE][MAX_SIZE];
+	char	board[MAX_SIZE][MAX_SIZE];
 }	t_node;
 
 typedef struct s_stack
@@ -37,7 +35,7 @@ typedef struct s_step
 }	t_step;
 
 // count.c
-int		is_violate(const t_node *n, const char *constrains);
+int		is_violate(const t_node *n, const int i, const int j, const char *constrains);
 
 // node.c
 t_node	*new_node(void);
@@ -47,14 +45,9 @@ t_node	*make_first_node(const char *constrains);
 // solve.c
 t_node	*solve(const char *constrains);
 
-// stack.c
-t_stack	*new_stack(void);
-void	s_put(t_stack *s, t_node *n);
-t_node	*s_pop(t_stack *s);
-
 // utils.c
 void	print_str(const char *str);
-void	print_board(const char **board);
+void	print_board(t_node *n);
 int		is_invalid_arg(const char *arg);
 int		*get_constrains(const char *arg);
 
