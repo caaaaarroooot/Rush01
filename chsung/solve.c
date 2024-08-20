@@ -12,13 +12,19 @@
 
 #include "universal.h"
 
-char	**solve(const int *constrains)
+t_node	*solve(const int *constrains)
 {
 	int		i;
-	char	**board;
+	t_stack	*s;
+	t_node	*answer;
 
-	board = malloc(sizeof(char *) * MAX_SIZE);
-	i = -1;
-	while (++i < MAX_SIZE)
-		board[i] = malloc(sizeof(char) * MAX_SIZE);
+	s = new_stack();
+	s_put(s, make_first_node(constrains));
+	while (s->len != 0)
+	{
+		/* code */
+	}
+	if (s->len == 0)
+		return (NULL);
+	return (answer);
 }

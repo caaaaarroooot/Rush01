@@ -45,7 +45,7 @@ t_node	*cp_node(const t_node *src);
 t_node	*make_first_node(const int *constrains);
 
 // solve.c
-char	**solve(const int *constrains);
+t_node	*solve(const int *constrains);
 
 // stack.c
 t_stack	*new_stack(void);
