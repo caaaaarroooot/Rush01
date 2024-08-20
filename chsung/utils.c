@@ -23,25 +23,25 @@ void	print_str(const char *str)
 	}
 }
 
-void	print_borad(const int n, const char **board)
+void	print_borad(const char **board)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < n)
+	while (i < MAX_SIZE)
 	{
-		while (j < n)
+		while (j < MAX_SIZE)
 		{
 			write(1, &(board[i][j]), 1);
-			if (j < n - 1)
+			if (j < MAX_SIZE - 1)
 				write(1, " ", 1);
 		}
 	}
 }
 
-int	invalid_arg(const int n, const char *arg)
+int	invalid_arg(const char *arg)
 {
 	int	i;
 	int	count;
@@ -50,9 +50,11 @@ int	invalid_arg(const int n, const char *arg)
 	count = 0;
 	while (arg[i] != '\0')
 	{
+		if (i >= 8 * MAX_SIZE)
+			return (1);
 		if (i % 2 == 0)
 		{
-			if ('1' <= arg[i] && arg[i] <= '0' + n)
+			if ('1' <= arg[i] && arg[i] <= '0' + MAX_SIZE)
 				count++;
 			else
 				return (1);
@@ -63,7 +65,7 @@ int	invalid_arg(const int n, const char *arg)
 				reuturn (1);
 		}
 	}
-	if (count != (n * 4))
+	if (count != (MAX_SIZE * 4))
 		return (1);
 	return (0);
 }
