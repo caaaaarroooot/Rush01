@@ -42,7 +42,7 @@ void	print_borad(const char **board)
 	}
 }
 
-int	invalid_arg(const char *arg)
+int	is_invalid_arg(const char *arg)
 {
 	int	i;
 	int	count;
@@ -71,7 +71,7 @@ int	invalid_arg(const char *arg)
 	return (0);
 }
 
-int	*constrain(const char *arg)
+int	*get_constrains(const char *arg)
 {
 	int	i;
 	int	j;

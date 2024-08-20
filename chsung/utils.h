@@ -18,5 +18,6 @@
 
 void	print_str(const char *str);
 void	print_borad(const char **board);
-int		invalid_arg(const char *arg);
+int		is_invalid_arg(const char *arg);
+int		*get_constrains(const char *arg);
 #endif
