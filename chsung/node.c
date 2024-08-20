@@ -49,13 +49,13 @@ void	new_node(t_node *current, const t_node *prev)
 void	clear_first(t_node	*n, const int i)
 {
 	if (i < MAX_SIZE)
-		n->board[0][i] = MAX_SIZE;
+		n->board[0][i] = '0' + MAX_SIZE;
 	else if (i < 2 * MAX_SIZE)
-		n->board[MAX_SIZE - 1][i - MAX_SIZE] = MAX_SIZE;
+		n->board[MAX_SIZE - 1][i - MAX_SIZE] = '0' + MAX_SIZE;
 	else if (i < 3 * MAX_SIZE)
-		n->board[i - 2 * MAX_SIZE][0] = MAX_SIZE;
+		n->board[i - 2 * MAX_SIZE][0] = '0' + MAX_SIZE;
 	else
-		n->board[i - 3 * MAX_SIZE][MAX_SIZE - 1] = MAX_SIZE;
+		n->board[i - 3 * MAX_SIZE][MAX_SIZE - 1] = '0' + MAX_SIZE;
 }
 
 void	clear_line(t_node *n, int i, int j, t_step s)
@@ -80,6 +80,8 @@ void	init_node(t_node *n)
 	init_board(n);
 	while (++i < 4 * MAX_SIZE)
 	{
+		// print_board(n);
+		// print_str("----------\n");
 		c = n->constrains[i] - '0';
 		if (c == 1)
 			clear_first(n, i);

@@ -29,9 +29,9 @@ void	print_board(const t_node *n)
 	int	j;
 
 	i = -1;
-	j = -1;
 	while (++i < MAX_SIZE)
 	{
+		j = -1;
 		while (++j < MAX_SIZE)
 		{
 			write(1, &(n->board[i][j]), 1);
