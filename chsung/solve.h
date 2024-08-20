@@ -13,6 +13,7 @@
 #ifndef SOLVE_H
 # define SOLVE_H
 # include "utils.h"
+# include "queue.h"
 
 char	**solve(const char *constrains);
 #endif

@@ -28,6 +28,7 @@ typedef struct s_queue
 	unsigned int	len;
 }	t_queue;
 
+t_node	*new_node(void);
 t_queue	*new_queue(void);
 void	q_put(t_queue *q, t_node *n);
 t_node	*q_get(t_queue *q);
