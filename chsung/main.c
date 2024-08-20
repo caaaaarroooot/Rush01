@@ -15,7 +15,7 @@
 int	main(int argc, char *argv[])
 {
 	const char	**board;
-	const int	*constrains;
+	const char	*constrains;
 
 	if (argc != 2 || is_invalid_arg(argv[1]))
 	{

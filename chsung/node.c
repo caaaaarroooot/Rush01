@@ -79,7 +79,7 @@ void	clear_line(t_node	*n, int i, int j, t_step s)
 	}
 }
 
-t_node	*make_first_node(const int *constrains)
+t_node	*make_first_node(const char *constrains)
 {
 	int		i;
 	int		r;
@@ -90,9 +90,10 @@ t_node	*make_first_node(const int *constrains)
 	n = new_node();
 	while (++i < 4 * MAX_SIZE)
 	{
-		if (constrains[i] == 1)
+		c = constrains[i] - '0';
+		if (c == 1)
 			clear_first(n, i);
-		else if (constrains[i] == MAX_SIZE)
+		else if (c == MAX_SIZE)
 		{
 			if (i < MAX_SIZE)
 				clear_line(n, 0, i, (t_step){1, 0});

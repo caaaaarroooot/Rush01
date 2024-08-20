@@ -12,7 +12,7 @@
 
 #include "universal.h"
 
-t_node	*solve(const int *constrains)
+t_node	*solve(const char *constrains)
 {
 	int		i;
 	t_stack	*s;
