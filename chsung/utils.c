@@ -51,7 +51,7 @@ int	is_invalid_arg(const char *arg)
 	count = 0;
 	while (arg[++i] != '\0')
 	{
-		if (i >= 8 * MAX_SIZE)
+		if (i >= 8 * MAX_SIZE - 1)
 			return (1);
 		if (i % 2 == 0)
 		{
