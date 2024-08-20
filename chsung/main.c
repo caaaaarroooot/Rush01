@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "solve.h"
+#include "universal.h"
 
 int	main(int argc, char *argv[])
 {

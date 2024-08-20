@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "universal.h"
 
 void	print_str(const char *str)
 {
@@ -63,7 +63,7 @@ int	is_invalid_arg(const char *arg)
 		else
 		{
 			if (arg[i] != ' ')
-				reuturn (1);
+				return (1);
 		}
 	}
 	if (count != (MAX_SIZE * 4))
