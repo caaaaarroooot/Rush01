@@ -35,6 +35,7 @@ int		is_violate(const t_node *n, const int *constrains);
 
 // node.c
 t_node	*new_node(void);
+t_node	*cp_node(const t_node *src);
 
 // solve.c
 char	**solve(const int *constrains);
