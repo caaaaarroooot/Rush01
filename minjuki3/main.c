@@ -6,13 +6,12 @@
 /*   By: minjuki3 <minjuki3@student.42gyeongsa      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:02:34 by minjuki3          #+#    #+#             */
-/*   Updated: 2024/08/20 18:58:55 by minjuki3         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:41:19 by minjuki3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
-
 #define SIZE 4
 
 void	print_board(const char board[SIZE][SIZE]);
@@ -49,7 +48,7 @@ void	dfs(char board[SIZE][SIZE], int row, int col)
 		is_exist = 0;
 		while (i < SIZE)
 		{
-			if (board[row][i] == num || board[i][col] == num)
+			if (board[row][i] == (num + '0') || board[i][col] == (num + '0'))
 			{
 				is_exist = 1;
 				break ;
@@ -84,12 +83,13 @@ void	print_board(const char board[SIZE][SIZE])
 		i++;
 	}
 	write(1, "\n", 1);
+	//	sleep(1);
 }
 
 int	main(void)
 {
-	char	board[SIZE][SIZE] = {{'0', '0', '4', '0'}, {'0', '4', '0', '0'},
-			{'0', '0', '0', '4'}, {'4', '0', '0', '0'}};
+	char	board[SIZE][SIZE] = {{'4', '0', '0', '0'}, {'0', '4', '0', '0'},
+			{'0', '0', '4', '0'}, {'0', '0', '0', '4'}};
 
 	dfs(board, 0, 0);
 	return (0);
