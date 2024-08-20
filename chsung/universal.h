@@ -30,12 +30,19 @@ typedef struct s_stack
 	unsigned int	len;
 }	t_stack;
 
+typedef struct s_step
+{
+	const int	i_step;
+	const int	j_step;
+}	t_step;
+
 // count.c
 int		is_violate(const t_node *n, const int *constrains);
 
 // node.c
 t_node	*new_node(void);
 t_node	*cp_node(const t_node *src);
+t_node	*make_first_node(const int *constrains);
 
 // solve.c
 char	**solve(const int *constrains);
