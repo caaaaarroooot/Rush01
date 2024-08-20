@@ -12,7 +12,7 @@
 
 #include "universal.h"
 
-char	**solve(const char *constrains)
+char	**solve(const int *constrains)
 {
 	int		i;
 	char	**board;

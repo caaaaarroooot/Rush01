@@ -71,15 +71,15 @@ int	is_invalid_arg(const char *arg)
 	return (0);
 }
 
-char	*get_constrains(const char *arg)
+int	*get_constrains(const char *arg)
 {
-	int		i;
-	int		j;
-	char	*arr;
+	int	i;
+	int	j;
+	int	*arr;
 
 	i = -1;
 	j = 0;
-	arr = malloc(sizeof(char) * MAX_SIZE * 4);
+	arr = malloc(sizeof(int) * MAX_SIZE * 4);
 	if (!arr)
 		return (NULL);
 	while (arg[++i] != '\0')

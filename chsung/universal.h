@@ -34,7 +34,7 @@ typedef struct s_stack
 int		is_violate(const t_node *n, const int *constrains);
 
 // solve.c
-char	**solve(const char *constrains);
+char	**solve(const int *constrains);
 
 // stack.c
 t_node	*new_node(void);
@@ -46,6 +46,6 @@ t_node	*s_pop(t_stack *s);
 void	print_str(const char *str);
 void	print_board(const char **board);
 int		is_invalid_arg(const char *arg);
-char	*get_constrains(const char *arg);
+int		*get_constrains(const char *arg);
 
 #endif
