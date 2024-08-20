@@ -6,13 +6,13 @@
 /*   By: minjuki3 <minjuki3@student.42gyeongsa      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:02:34 by minjuki3          #+#    #+#             */
-/*   Updated: 2024/08/21 00:45:10 by minjuki3         ###   ########.fr       */
+/*   Updated: 2024/08/21 01:58:35 by minjuki3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
-#define SIZE 4
+#define SIZE 9
 
 void	print_board(const char board[SIZE][SIZE]);
 int		is_valid(char board[SIZE][SIZE], int row, int col, int num,
@@ -82,7 +82,8 @@ int	is_valid(char board[SIZE][SIZE], int row, int col, int num,
 		}
 		i++;
 	}
-	if (cnt > input[2][row])
+	if (((col != SIZE - 1) && (cnt > input[2][row])) || ((col == SIZE - 1)
+			&& (cnt != input[2][row])))
 	{
 		board[row][col] = '0';
 		return (0);
@@ -99,7 +100,8 @@ int	is_valid(char board[SIZE][SIZE], int row, int col, int num,
 		}
 		i++;
 	}
-	if (cnt > input[0][col])
+	if (((row != SIZE - 1) && (cnt > input[0][col])) || ((row == SIZE - 1)
+			&& (cnt != input[0][col])))
 	{
 		board[row][col] = '0';
 		return (0);
@@ -170,10 +172,20 @@ void	print_board(const char board[SIZE][SIZE])
 
 int	main(void)
 {
-	char	board[SIZE][SIZE] = {{'0', '0', '0', '0'}, {'0', '0', '0', '0'},
-			{'0', '0', '0', '0'}, {'0', '0', '0', '0'}};
-	int		input[SIZE][SIZE] = {{1,3,2,2}, {3,2,1,2}, {1,3,2,2}, {3,1,2,2}};
+	int	input[4][SIZE] = {
+	{1, 2, 6, 3, 2, 4, 3, 2, 3}, 
+	{4, 2, 2, 2, 3, 3, 3, 4, 1}, 
+	{1, 4, 2, 3, 5, 2, 4, 2, 4}, 
+	{4, 2, 3, 2, 3, 2, 3, 6, 1}};
 
+	char board[SIZE][SIZE] = {{'0', '0', '0', '0', '0', '0', '2', '0', '6'},
+		{'0', '0', '0', '0', '1', '0', '0', '0', '0'}, {'0', '0', '0', '0', '0',
+		'3', '0', '8', '5'}, {'0', '0', '1', '0', '0', '0', '7', '4', '0'},
+		{'0', '0', '7', '0', '0', '0', '9', '0', '0'}, {'0', '0', '2', '3', '0',
+		'0', '0', '0', '0'}, {'4', '6', '0', '0', '0', '5', '0', '0', '2'},
+		{'0', '4', '0', '6', '0', '0', '0', '2', '0'}, {'0', '0', '0', '0', '6',
+		'1', '0', '0', '0'}
+	};
 	dfs(board, 0, 0, input);
 	return (0);
 }
