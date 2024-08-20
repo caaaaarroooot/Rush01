@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 void	print_str(const char *str);
-void	print_borad(const char **board);
+void	print_board(const char **board);
 int		is_invalid_arg(const char *arg);
-int		*get_constrains(const char *arg);
+char	*get_constrains(const char *arg);
 #endif
