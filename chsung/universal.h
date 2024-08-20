@@ -33,11 +33,13 @@ typedef struct s_stack
 // count.c
 int		is_violate(const t_node *n, const int *constrains);
 
+// node.c
+t_node	*new_node(void);
+
 // solve.c
 char	**solve(const int *constrains);
 
 // stack.c
-t_node	*new_node(void);
 t_stack	*new_stack(void);
 void	s_put(t_stack *s, t_node *n);
 t_node	*s_pop(t_stack *s);
