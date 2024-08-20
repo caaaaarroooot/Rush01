@@ -10,49 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "universal.h"
 
 void	print_str(const char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i] != '\0')
+	i = -1;
+	while (str[++i] != '\0')
 	{
 		write(1, &str[i], 1);
 	}
 }
 
-void	print_borad(const int n, const char **board)
+void	print_board(const char **board)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < n)
+	i = -1;
+	j = -1;
+	while (++i < MAX_SIZE)
 	{
-		while (j < n)
+		while (++j < MAX_SIZE)
 		{
 			write(1, &(board[i][j]), 1);
-			if (j < n - 1)
+			if (j < MAX_SIZE - 1)
 				write(1, " ", 1);
 		}
+		write(1, "\n", 1);
 	}
 }
 
-int	invalid_arg(const int n, const char *arg)
+int	is_invalid_arg(const char *arg)
 {
 	int	i;
 	int	count;
 
-	i = 0;
+	i = -1;
 	count = 0;
-	while (arg[i] != '\0')
+	while (arg[++i] != '\0')
 	{
+		if (i >= 8 * MAX_SIZE)
+			return (1);
 		if (i % 2 == 0)
 		{
-			if ('1' <= arg[i] && arg[i] <= '0' + n)
+			if ('1' <= arg[i] && arg[i] <= '0' + MAX_SIZE)
 				count++;
 			else
 				return (1);
@@ -60,10 +63,27 @@ int	invalid_arg(const int n, const char *arg)
 		else
 		{
 			if (arg[i] != ' ')
-				reuturn (1);
+				return (1);
 		}
 	}
-	if (count != (n * 4))
+	if (count != (MAX_SIZE * 4))
 		return (1);
 	return (0);
+}
+
+char	*get_constrains(const char *arg)
+{
+	int		i;
+	int		j;
+	char	*arr;
+
+	i = -1;
+	j = 0;
+	arr = malloc(MAX_SIZE * 4);
+	if (!arr)
+		return (NULL);
+	while (arg[++i] != '\0')
+		if ('1' <= arg[i] && arg[i] <= '0' + MAX_SIZE)
+			arr[j++] = arg[i];
+	return (arr);
 }
