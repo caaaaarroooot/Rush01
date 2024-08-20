@@ -25,8 +25,11 @@ int	main(int argc, char *argv[])
 	constrains = get_constrains(argv[1]);
 	result = solve(constrains);
 	if (!result)
+	{
 		// TODO: FIX
 		print_str("No Answer\n");
+		return (0);
+	}
 	print_board(result);
 	return (0);
 }

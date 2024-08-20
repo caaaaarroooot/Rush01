@@ -23,7 +23,7 @@ void	print_str(const char *str)
 	}
 }
 
-void	print_board(t_node *n)
+void	print_board(const t_node *n)
 {
 	int	i;
 	int	j;

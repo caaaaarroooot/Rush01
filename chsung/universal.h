@@ -44,7 +44,7 @@ t_node			*solve(const char *constrains);
 
 // utils.c
 void			print_str(const char *str);
-void			print_board(t_node *n);
+void			print_board(const t_node *n);
 int				is_invalid_arg(const char *arg);
 char			*get_constrains(const char *arg);
 
