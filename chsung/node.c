@@ -80,8 +80,6 @@ void	init_node(t_node *n)
 	init_board(n);
 	while (++i < 4 * MAX_SIZE)
 	{
-		// print_board(n);
-		// print_str("----------\n");
 		c = n->constrains[i] - '0';
 		if (c == 1)
 			clear_first(n, i);
