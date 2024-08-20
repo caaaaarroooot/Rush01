@@ -36,8 +36,8 @@ typedef t_coordinate	t_step;
 int				is_not_goal(const t_node *n);
 
 // node.c
-void			init_node(t_node *n);
 void			new_node(t_node *current, const t_node *prev);
+void			init_node(t_node *n);
 
 // solve.c
 t_node			*solve(const char *constrains);
@@ -50,6 +50,7 @@ char			*get_constrains(const char *arg);
 t_coordinate	get_coordinate(const int idx);
 
 // utils2.c
-int				is_invalid_row_col_wise(const t_node *n);
+int				is_duplicate_row(const t_node *n);
+int				is_duplicate_col(const t_node *n);
 
 #endif

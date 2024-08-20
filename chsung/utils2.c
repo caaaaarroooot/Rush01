@@ -12,15 +12,13 @@
 
 #include "universal.h"
 
-int	is_invalid_row_col_wise(const t_node *n)
+int	is_duplicate_row(const t_node *n)
 {
-	int				i;
-	int				j;
-	int				k;
-	t_coordinate	coord;
+	int	i;
+	int	j;
+	int	k;
 
-	coord = get_coordinate(n->depth);
-	i = coord.i;
+	i = get_coordinate(n->depth).i;
 	j = -1;
 	while (++j < MAX_SIZE)
 	{
@@ -31,7 +29,16 @@ int	is_invalid_row_col_wise(const t_node *n)
 			if (n->board[i][j] == n->board[i][k])
 				return (1);
 	}
-	j = coord.j;
+	return (0);
+}
+
+int	is_duplicate_col(const t_node *n)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	j = get_coordinate(n->depth).j;
 	i = -1;
 	while (++i < MAX_SIZE)
 	{

@@ -94,21 +94,18 @@ int	count_col_down(const t_node *n, const int j)
 
 int	is_not_goal(const t_node *n)
 {
-	t_coordinate	coord;
-	int				con;
+	int			i;
+	int			con;
 
-	coord = get_coordinate(n->depth);
-	con = n->constrains[coord.j] - '0';
-	if (count_col_up(n, coord.j) != con)
-		return (1);
-	con = n->constrains[MAX_SIZE + coord.j] - '0';
-	if (count_col_down(n, coord.j) != con)
-		return (1);
-	con = n->constrains[2 * MAX_SIZE + coord.i] - '0';
-	if (count_row_left(n, coord.i) != con)
-		return (1);
-	con = n->constrains[3 * MAX_SIZE + coord.i] - '0';
-	if (count_row_right(n, coord.i) != con)
-		return (1);
+	i = -1;
+	while (++i < MAX_SIZE * 4)
+	{
+		con = n->constrains[i] - '0';
+		if (((i / MAX_SIZE == 0) && (count_col_up(n, i % MAX_SIZE) != con)) \
+		|| ((i / MAX_SIZE == 1) && (count_col_down(n, i % MAX_SIZE) != con)) \
+		|| ((i / MAX_SIZE == 2) && (count_row_left(n, i % MAX_SIZE) != con)) \
+		|| ((i / MAX_SIZE == 3) && (count_row_right(n, i % MAX_SIZE) != con)))
+			return (1);
+	}
 	return (0);
 }

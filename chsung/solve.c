@@ -28,9 +28,8 @@ int	try_place(t_node *n, char c)
 
 	coord = get_coordinate(n->depth);
 	n->board[coord.i][coord.j] = c;
-	if (is_invalid_row_col_wise(n))
+	if ((is_duplicate_row(n) || is_duplicate_col(n)))
 	{
-		// printf("violate: %c\n", c);
 		n->board[coord.i][coord.j] = 0;
 		return (0);
 	}
@@ -66,9 +65,6 @@ t_node	*dfs(const t_node *prev)
 
 	res = NULL;
 	new_node(&current, prev);
-	// print_str("----------\n");
-	// printf("%d\n", current.depth);
-	// print_board(&current);
 	if (current.depth == MAX_SIZE * MAX_SIZE)
 	{
 		if (is_not_goal(&current))
@@ -82,7 +78,6 @@ t_node	*dfs(const t_node *prev)
 	{
 		if (try_place(&current, c))
 		{
-			// printf("try_place\n");
 			res = dfs(&current);
 		}
 		if (res)
