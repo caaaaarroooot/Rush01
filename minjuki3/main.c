@@ -6,7 +6,7 @@
 /*   By: minjuki3 <minjuki3@student.42gyeongsa      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:02:34 by minjuki3          #+#    #+#             */
-/*   Updated: 2024/08/21 00:02:52 by minjuki3         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:45:10 by minjuki3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	is_valid(char board[SIZE][SIZE], int row, int col, int num,
 	{
 		if (board[i][col] > max)
 		{
-			max = board[row][i];
+			max = board[i][col];
 			cnt++;
 		}
 		i++;
@@ -170,10 +170,9 @@ void	print_board(const char board[SIZE][SIZE])
 
 int	main(void)
 {
-	char	board[SIZE][SIZE] = {{'0', '0', '0', '4'}, {'0', '0', '4', '0'},
-			{'0', '4', '0', '0'}, {'4', '0', '0', '0'}};
-	int		input[SIZE][SIZE] = {{4, 3, 2, 1}, {1, 2, 2, 2}, {4, 3, 2, 1}, {1,
-				2, 2, 2}};
+	char	board[SIZE][SIZE] = {{'0', '0', '0', '0'}, {'0', '0', '0', '0'},
+			{'0', '0', '0', '0'}, {'0', '0', '0', '0'}};
+	int		input[SIZE][SIZE] = {{1,3,2,2}, {3,2,1,2}, {1,3,2,2}, {3,1,2,2}};
 
 	dfs(board, 0, 0, input);
 	return (0);
