@@ -70,7 +70,11 @@ t_node	*dfs(const t_node *prev)
 	// printf("%d\n", current.depth);
 	// print_board(&current);
 	if (current.depth == MAX_SIZE * MAX_SIZE)
+	{
+		if (is_not_goal(&current))
+			return (NULL);
 		return (build_result(&current));
+	}
 	if (already_placed(&current))
 		return (dfs(&current));
 	c = '0';
