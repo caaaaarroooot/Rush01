@@ -6,7 +6,7 @@
 /*   By: minjuki3 <minjuki3@student.42gyeongsa      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:02:34 by minjuki3          #+#    #+#             */
-/*   Updated: 2024/08/20 22:57:50 by minjuki3         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:02:52 by minjuki3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,46 @@ int	is_valid(char board[SIZE][SIZE], int row, int col, int num,
 		board[row][col] = '0';
 		return (0);
 	}
+	if (col == SIZE - 1)
+	{
+		i = SIZE - 1;
+		max = 0;
+		cnt = 0;
+		while (i >= 0) // r->l
+		{
+			if (board[row][i] > max)
+			{
+				max = board[row][i];
+				cnt++;
+			}
+			i--;
+		}
+		if (cnt != input[3][row])
+		{
+			board[row][col] = '0';
+			return (0);
+		}
+	}
+	if (row == SIZE - 1)
+	{
+		i = SIZE - 1;
+		max = 0;
+		cnt = 0;
+		while (i >= 0) // b ->t
+		{
+			if (board[i][col] > max)
+			{
+				max = board[i][col];
+				cnt++;
+			}
+			i--;
+		}
+		if (cnt != input[1][col])
+		{
+			board[row][col] = '0';
+			return (0);
+		}
+	}
 	board[row][col] = '0';
 	return (1);
 }
@@ -126,8 +166,6 @@ void	print_board(const char board[SIZE][SIZE])
 		write(1, "\n", 1);
 		i++;
 	}
-	write(1, "\n", 1);
-	//	sleep(1);
 }
 
 int	main(void)
