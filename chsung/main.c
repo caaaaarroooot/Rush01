@@ -30,5 +30,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	print_board(result);
+	free((void *)constrains);
+	free((void *)result);
 	return (0);
 }
