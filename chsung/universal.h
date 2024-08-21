@@ -32,6 +32,9 @@ typedef struct s_coordinate
 
 typedef t_coordinate	t_step;
 
+// check.c
+int				is_invalid_placement(t_node *n, t_coordinate c);
+
 // count.c
 int				is_not_goal(const t_node *n);
 
