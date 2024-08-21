@@ -89,8 +89,6 @@ int	is_invaild_col_down(const t_node *n, const int j)
 	int	c;
 	int	prev;
 
-	print_board(n);
-
 	i = MAX_SIZE;
 	c = 0;
 	prev = 0;
