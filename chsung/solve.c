@@ -28,7 +28,7 @@ int	try_place(t_node *n, char c)
 
 	coord = get_coordinate(n->depth);
 	n->board[coord.i][coord.j] = c;
-	if ((is_duplicate_row(n) || is_duplicate_col(n)))
+	if (is_invalid_placement(n, coord))
 	{
 		n->board[coord.i][coord.j] = 0;
 		return (0);
@@ -73,8 +73,8 @@ t_node	*dfs(const t_node *prev)
 	}
 	if (already_placed(&current))
 		return (dfs(&current));
-	c = '0';
-	while (++c <= '0' + MAX_SIZE)
+	c = '1' + MAX_SIZE;
+	while (--c > '0')
 	{
 		if (try_place(&current, c))
 		{

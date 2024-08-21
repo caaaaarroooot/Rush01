@@ -32,6 +32,9 @@ typedef struct s_coordinate
 
 typedef t_coordinate	t_step;
 
+// check.c
+int				is_invalid_placement(t_node *n, t_coordinate c);
+
 // count.c
 int				is_not_goal(const t_node *n);
 
@@ -50,7 +53,9 @@ char			*get_constrains(const char *arg);
 t_coordinate	get_coordinate(const int idx);
 
 // utils2.c
-int				is_duplicate_row(const t_node *n);
-int				is_duplicate_col(const t_node *n);
+int				is_duplicate_row(const t_node *n, t_coordinate c);
+int				is_duplicate_col(const t_node *n, t_coordinate c);
+int				too_fast(int con, char val, int idx);
+int				too_fast_right(int con, char val, int idx);
 
 #endif

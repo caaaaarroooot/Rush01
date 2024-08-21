@@ -12,42 +12,56 @@
 
 #include "universal.h"
 
-int	is_duplicate_row(const t_node *n)
+int	is_duplicate_row(const t_node *n, t_coordinate c)
 {
-	int	i;
-	int	j;
 	int	k;
 
-	i = get_coordinate(n->depth).i;
-	j = -1;
-	while (++j < MAX_SIZE)
+	c = get_coordinate(n->depth);
+	k = -1;
+	while (++k < MAX_SIZE)
 	{
-		if (n->board[i][j] == 0)
+		if (k == c.j)
 			continue ;
-		k = j;
-		while (++k < MAX_SIZE)
-			if (n->board[i][j] == n->board[i][k])
-				return (1);
+		if (n->board[c.i][c.j] == n->board[c.i][k])
+			return (1);
 	}
 	return (0);
 }
 
-int	is_duplicate_col(const t_node *n)
+int	is_duplicate_col(const t_node *n, t_coordinate c)
 {
-	int	i;
-	int	j;
 	int	k;
 
-	j = get_coordinate(n->depth).j;
-	i = -1;
-	while (++i < MAX_SIZE)
+	c = get_coordinate(n->depth);
+	k = -1;
+	while (++k < MAX_SIZE)
 	{
-		if (n->board[i][j] == 0)
+		if (k == c.i)
 			continue ;
-		k = i;
-		while (++k < MAX_SIZE)
-			if (n->board[i][j] == n->board[k][j])
-				return (1);
+		if (n->board[c.i][c.j] == n->board[k][c.j])
+			return (1);
 	}
+	return (0);
+}
+
+int	too_fast(int con, char val, int idx)
+{
+	int	min_idx;
+
+	min_idx = con - 1 - (MAX_SIZE - (val - '0'));
+	if (idx < min_idx)
+		return (1);
+	return (0);
+}
+
+int	too_fast_right(int con, char val, int idx)
+{
+	int	min_idx;
+	int	max_idx;
+
+	min_idx = con - 1 - (MAX_SIZE - (val - '0'));
+	max_idx = MAX_SIZE - 1 - min_idx;
+	if (idx > max_idx)
+		return (1);
 	return (0);
 }
