@@ -6,7 +6,7 @@
 /*   By: jilee2 <devcarrot12@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:44:56 by jilee2            #+#    #+#             */
-/*   Updated: 2024/08/21 01:42:09 by jilee2           ###   ########.fr       */
+/*   Updated: 2024/08/21 13:32:29 by jilee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,21 @@ char	**board_malloc(int n)
 		i++;
 	}
 	return (board);
+}
+
+void	board_free(char **board, char **condition)
+{
+	int	i;
+
+	i = 0;
+	while (condition[i] || board[i])
+	{
+		if (condition[i])
+			free (condition[i]);
+		if (board[i])
+			free (board[i]);
+		i++;
+	}
+	free (condition);
+	free (board);
 }

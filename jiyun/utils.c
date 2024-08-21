@@ -6,7 +6,7 @@
 /*   By: chsung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:17:01 by chsung            #+#    #+#             */
-/*   Updated: 2024/08/21 06:20:23 by jilee2           ###   ########.fr       */
+/*   Updated: 2024/08/21 13:12:48 by jilee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,18 @@ void	print_board(const int n, char **board)
 	}
 }
 /*update*/
+/*여기 n은 size임*/
 char    **makeCondition(const int n, const char *arg)
 {
 	char	**condition;
 	int		i;
 
 	printf("makecondition\n");
-	condition = (char **)malloc(sizeof(char *) * n);
+	condition = (char **)malloc(sizeof(char *) * n + 1);
 	if (!condition)
 		return (0);
 	i = 0;
-	while (i < n)
+	while (i <= n)
 	{
 		condition[i] = (char *)malloc(sizeof(char) * n);
 		if (!condition[i])
@@ -75,6 +76,13 @@ char    **makeCondition(const int n, const char *arg)
 		i++;
 	}
 	condition = completeCondition(n, condition, arg);
+	condition[n][0] = '0';
+	i = 0;
+	while (i <= n)
+	{
+		printf("%s\n", condition[i]);
+		i++;
+	}
 	return (condition);
 }
 
@@ -145,30 +153,20 @@ int	invalid_arg(const int n, const char *arg)
 	}
 	return (0);
 }
-/*
+
 int	handling_arg(const char *arg)
 {
-	
-}
-*/
-int     ft_sqrt(int nb)
-{
-        int     s;
-        int     t;
-        int     cnt;
+	int	size;
+	int	i;
 
-        cnt = 0;
-        if (nb <= 0)
-                return (0);
-        t = 0;
-        s = nb / 2;
-        while (s != t && cnt < 46341)
-        {
-                t = s;
-                s = (t + nb / t) / 2;
-                cnt++;
-        }
-        if (s * s != nb)
-                return (0);
-        return (s);
+	i = 0;
+	while (arg[i])
+		i++;
+	printf("i: %d\n", i);
+	if ((i + 1) % 8 == 0)
+		size = i / 8 + 1;
+	else
+		size = 0;
+	printf("size: %d", size);
+	return (size);
 }

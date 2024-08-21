@@ -6,7 +6,7 @@
 /*   By: jilee2 <devcarrot12@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:52:05 by jilee2            #+#    #+#             */
-/*   Updated: 2024/08/21 06:21:59 by jilee2           ###   ########.fr       */
+/*   Updated: 2024/08/21 13:31:34 by jilee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,25 @@ int	main(int argc, char **argv)
 {
 	char	**board;
 	char	**condition;
-	int		i;
-//	int		size;
+	int		size;
 
 	printf("strat\n");
 	if (argc != 2)
 	{
-		// write로 바꾸기
 		print_str("argc Error\n");
 		return (1);
 	}
-	if (invalid_arg(MAX_SIZE, argv[1]) == 1)
+	size = handling_arg(argv[1]);
+	if (size == 0 || invalid_arg(size, argv[1]) == 1)
         {
                 print_str("invalid Error\n");
                 return (0);
         }
-//	size = invalid_arg(argv[1]);
 //	printf("%d\n", size);
-	condition = makeCondition(MAX_SIZE, argv[1]);
-        board = solve(MAX_SIZE, condition);
+	condition = makeCondition(size, argv[1]);
+        board = solve(size, condition);
 //        print_borad(MAX_SIZE, board);
+/*
 	i = 0;
 	while (condition[i] || board[i])
 	{
@@ -55,6 +54,8 @@ int	main(int argc, char **argv)
 	}
 	free(condition);
 	free(board);
+	*/
+	board_free(board, condition);
 	printf("end\n");
 	return (0);
 }

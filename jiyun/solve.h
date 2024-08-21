@@ -6,7 +6,7 @@
 /*   By: jilee2 <devcarrot12@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:44:23 by jilee2            #+#    #+#             */
-/*   Updated: 2024/08/21 01:41:22 by jilee2           ###   ########.fr       */
+/*   Updated: 2024/08/21 13:30:47 by jilee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@
 char	**solve(int size, char **condition);
 char	**initial_board(int size, char **condition);
 char	**board_malloc(int n);
+void	board_free(char **board, char **condition);
 #endif
