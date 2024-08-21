@@ -53,7 +53,7 @@ char			*get_constrains(const char *arg);
 t_coordinate	get_coordinate(const int idx);
 
 // utils2.c
-int				is_duplicate_row(const t_node *n);
-int				is_duplicate_col(const t_node *n);
+int				is_duplicate_row(const t_node *n, t_coordinate c);
+int				is_duplicate_col(const t_node *n, t_coordinate c);
 
 #endif

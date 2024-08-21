@@ -73,8 +73,8 @@ t_node	*dfs(const t_node *prev)
 	}
 	if (already_placed(&current))
 		return (dfs(&current));
-	c = '0';
-	while (++c <= '0' + MAX_SIZE)
+	c = '1' + MAX_SIZE;
+	while (--c > '0')
 	{
 		if (try_place(&current, c))
 		{
