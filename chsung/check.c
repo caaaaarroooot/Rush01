@@ -12,116 +12,121 @@
 
 #include "universal.h"
 
-int	is_invaild_row_left(const t_node *n, const int i)
+int	is_invaild_row_left(const t_node *n, t_coordinate c)
 {
 	int	j;
-	int	c;
+	int	count;
 	int	prev;
-	int	constrain;
+	int	con;
 
 	j = -1;
-	c = 0;
+	count = 0;
 	prev = 0;
-	constrain = n->constrains[2 * MAX_SIZE + i] - '0';
+	con = n->constrains[2 * MAX_SIZE + c.i] - '0';
+	if (too_fast(con, n->board[c.i][c.j], c.j))
+		return (1);
 	while (++j < MAX_SIZE)
 	{
-		if (n->board[i][j] == 0)
+		if (n->board[c.i][j] == 0)
 			break ;
-		if (prev < n->board[i][j])
+		if (prev < n->board[c.i][j])
 		{
-			prev = n->board[i][j];
-			c++;
+			prev = n->board[c.i][j];
+			count++;
 		}
 	}
-	if ((c > constrain) || ((prev == '0' + MAX_SIZE) && (c < constrain)))
+	if ((count > con) || ((prev == '0' + MAX_SIZE) && (count < con)))
 		return (1);
 	return (0);
 }
 
-int	is_invaild_row_right(const t_node *n, const int i)
+int	is_invaild_row_right(const t_node *n, t_coordinate c)
 {
 	int	j;
-	int	c;
+	int	count;
 	int	prev;
-	int	constrain;
+	int	con;
 
 	j = MAX_SIZE;
-	c = 0;
+	count = 0;
 	prev = 0;
-	constrain = n->constrains[3 * MAX_SIZE + i] - '0';
+	con = n->constrains[3 * MAX_SIZE + c.i] - '0';
+	if (too_fast_right(con, n->board[c.i][c.j], c.j))
+		return (1);
 	while (--j >= 0)
 	{
-		if (n->board[i][j] == 0)
+		if (n->board[c.i][j] == 0)
 			break ;
-		if (prev < n->board[i][j])
+		if (prev < n->board[c.i][j])
 		{
-			prev = n->board[i][j];
-			c++;
+			prev = n->board[c.i][j];
+			count++;
 		}
 	}
-	if ((c > constrain) || ((prev == '0' + MAX_SIZE) && (c < constrain)))
+	if ((count > con) || ((prev == '0' + MAX_SIZE) && (count < con)))
 		return (1);
 	return (0);
 }
 
-int	is_invaild_col_up(const t_node *n, const int j)
+int	is_invaild_col_up(const t_node *n, t_coordinate c)
 {
 	int	i;
-	int	c;
+	int	count;
 	int	prev;
-	int	constrain;
+	int	con;
 
 	i = -1;
-	c = 0;
+	count = 0;
 	prev = 0;
-	constrain = n->constrains[j] - '0';
+	con = n->constrains[c.j] - '0';
+	if (too_fast(con, n->board[c.i][c.j], c.i))
+		return (1);
 	while (++i < MAX_SIZE)
 	{
-		if (n->board[i][j] == 0)
+		if (n->board[i][c.j] == 0)
 			break ;
-		if (prev < n->board[i][j])
+		if (prev < n->board[i][c.j])
 		{
-			prev = n->board[i][j];
-			c++;
+			prev = n->board[i][c.j];
+			count++;
 		}
 	}
-	if ((c > constrain) || ((prev == '0' + MAX_SIZE) && (c < constrain)))
+	if ((count > con) || ((prev == '0' + MAX_SIZE) && (count < con)))
 		return (1);
 	return (0);
 }
 
-int	is_invaild_col_down(const t_node *n, const int j)
+int	is_invaild_col_down(const t_node *n, t_coordinate c)
 {
 	int	i;
-	int	c;
+	int	count;
 	int	prev;
-	int	constrain;
+	int	con;
 
 	i = MAX_SIZE;
-	c = 0;
+	count = 0;
 	prev = 0;
-	constrain = n->constrains[MAX_SIZE + j] - '0';
+	con = n->constrains[MAX_SIZE + c.j] - '0';
+	if (too_fast_right(con, n->board[c.i][c.j], c.i))
+		return (1);
 	while (--i >= 0)
 	{
-		if (n->board[i][j] == 0)
+		if (n->board[i][c.j] == 0)
 			break ;
-		if (prev < n->board[i][j])
+		if (prev < n->board[i][c.j])
 		{
-			prev = n->board[i][j];
-			c++;
+			prev = n->board[i][c.j];
+			count++;
 		}
 	}
-	if ((c > constrain) || ((prev == '0' + MAX_SIZE) && (c < constrain)))
+	if ((count > con) || ((prev == '0' + MAX_SIZE) && (count < con)))
 		return (1);
 	return (0);
 }
 
 int	is_invalid_placement(t_node *n, t_coordinate c)
 {
-	// return (is_duplicate_row(n, c) || is_duplicate_col(n, c));
-	// return (is_duplicate_row(n, c) || is_duplicate_col(n, c) \
-	// 	|| is_invaild_col_up(n, c.j) || is_invaild_row_left(n, c.i));
 	return (is_duplicate_row(n, c) || is_duplicate_col(n, c) \
-		|| is_invaild_col_up(n, c.j) || is_invaild_col_down (n, c.j) \
-		|| is_invaild_row_left(n, c.i) || is_invaild_row_right(n, c.i));
+		|| is_invaild_col_up(n, c) || is_invaild_col_down (n, c) \
+		|| is_invaild_row_left(n, c) || is_invaild_row_right(n, c));
 }

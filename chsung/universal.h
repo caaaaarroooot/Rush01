@@ -55,5 +55,7 @@ t_coordinate	get_coordinate(const int idx);
 // utils2.c
 int				is_duplicate_row(const t_node *n, t_coordinate c);
 int				is_duplicate_col(const t_node *n, t_coordinate c);
+int				too_fast(int con, char val, int idx);
+int				too_fast_right(int con, char val, int idx);
 
 #endif
